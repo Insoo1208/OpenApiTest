@@ -3,28 +3,42 @@ const path = "http://book.interpark.com/api/bestSeller.api"
 
 const ulEl = document.querySelector('.bs');
 
-// $.ajax({
-//   method: "GET",
-//   url: path,
-//   data: { key: apiKey, 
-//     categoryId: '100',
-//     output: 'json'
-//   }
-// })
-//   .done(function( msg ) {
-//     console.log(msg);
-//     for (let index = 0; index < 10; index++) {
-//       console.log(msg.item[index].title);
-//         const liChild = document.createElement('li');
-//         liChild.textContent = `${msg.item[index].title}, ${msg.item[index].author}`;
-//         ulEl.append(liChild);
-//       }
-//     });
+function bsView(msg, index) {
+  const liChild = document.createElement('li');
+  const imgChild = document.createElement('img');
+  const spanChildTitle = document.createElement('span');
+  const spanChildDesc = document.createElement('span');
 
-fetch("http://book.interpark.com/api/bestSeller.api",
-  {key: apiKey, 
-  categoryId: '100',
-  output: 'json'}
-  )
-  .then((response) => console.log(response.json))
-  .then((data) => console.log(data));
+  liChild.classList.add('bs-list');
+
+  imgChild.src = msg.item[index].coverLargeUrl;
+  imgChild.classList.add('thumbnail');
+
+  spanChildTitle.textContent = msg.item[index].title;
+  spanChildDesc.textContent = msg.item[index].description;
+  
+  ulEl.append(liChild);
+  liChild.append(imgChild, spanChildTitle, spanChildDesc);
+}
+
+$.ajax({
+  method: "GET",
+  url: path,
+  data: { key: apiKey, 
+    categoryId: '100',
+    output: 'json'
+  }
+})
+  .done(function( msg ) {
+    for (let index = 0; index < 10; index++) {
+      bsView(msg, index);
+      }
+    });
+
+// fetch(`http://book.interpark.com/api/bestSeller.api`,
+//   {key: apiKey, 
+//   categoryId: '100',
+//   output: 'json'}
+//   )
+//   .then((response) => console.log(response))
+//   .then((data) => console.log(data));
