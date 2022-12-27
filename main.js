@@ -1,7 +1,22 @@
 const apiKey = 'A592DDA642BDA14ABAE08F0F8BC8215C978F5386563B9D14F37537C7952AE4F8';
-const path = "http://book.interpark.com/api/bestSeller.api"
+const path = 'http://book.interpark.com/api/bestSeller.api'
 
 const ulEl = document.querySelector('.bs');
+
+
+// $.ajax({
+//   method: "GET",
+//   url: path,
+//   data: { key: apiKey, 
+//     categoryId: '100',
+//     output: 'json'
+//   }
+// })
+//   .done(function(msg) {
+//     for (let index = 0; index < 10; index++) {
+//       bsView(msg, index);
+//       }
+//     });
 
 function bsView(data, index) {
   const liChild = document.createElement('li');
@@ -21,23 +36,21 @@ function bsView(data, index) {
   liChild.append(imgChild, spanChildTitle, spanChildDesc);
 }
 
-// $.ajax({
-//   method: "GET",
-//   url: path,
-//   data: { key: apiKey, 
-//     categoryId: '100',
-//     output: 'json'
-//   }
-// })
-//   .done(function(msg) {
-//     for (let index = 0; index < 10; index++) {
-//       bsView(msg, index);
-//       }
-//     });
 
-const url = `http://book.interpark.com/api/bestSeller.api?key=${apiKey}&categoryId=100&output=json`;
+function createUrl(obj) {
+  let url = `${path}?key=${apiKey}`;
+  for (const key in obj) {
+    url += `&${key}=${obj[key]}`;
+  }
+  return url;
+}
 
-fetch(url)
+const bestseller = {
+  categoryId: 100,
+  output: 'json'
+}
+
+fetch(createUrl(bestseller))
   .then((response) => response.json())
   .then((data) => {
     for (let index = 0; index < 10; index++) {
