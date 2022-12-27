@@ -31,7 +31,7 @@ function bsView(data, index) {
 
   spanChildTitle.textContent = data.item[index].title;
   spanChildDesc.textContent = data.item[index].description;
-  
+
   ulEl.append(liChild);
   liChild.append(imgChild, spanChildTitle, spanChildDesc);
 }
@@ -50,7 +50,10 @@ const bestseller = {
   output: 'json'
 }
 
-fetch(createUrl(bestseller))
+fetch(createUrl({
+  categoryId: 100,
+  output: 'json'
+}))
   .then((response) => response.json())
   .then((data) => {
     for (let index = 0; index < 10; index++) {
