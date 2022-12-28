@@ -2,7 +2,76 @@
   color: blueviolet;
 }
 
+
+a {
+  display: block;
+  text-decoration: none;
+}
+
 .thumbnail {
-  width: 100px;
-  height: 150px;
+  width: 150px;
+  height: 200px;
+}
+
+.contents {
+  width: 500px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  border: 2px solid blue;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.contents a {
+  padding: 15px;
+}
+
+.sub-contents {
+  flex: 1;
+  padding: 10px;
+  cursor: default;
+}
+
+.sub-contents > span,
+.sub-contents > li {
+  display: block;
+  margin: 15px 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: keep-all;
+}
+
+.sub-contents .title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sub-contents .authors .author {
+  display: inline-block;
+}
+
+.sub-contents .authors .author::after {
+  content: ', ';
+  margin-right: 5px;
+}
+
+.sub-contents .authors .author:last-child::after {
+  content: '';
+}
+
+.sub-contents .discription {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: keep-all;
+}
+
+.sub-contents .price::after {
+  content: ' 원';
 }
